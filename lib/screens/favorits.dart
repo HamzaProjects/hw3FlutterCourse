@@ -1,3 +1,4 @@
+import 'package:ecommercehwthird/components/app_cart_icon.dart';
 import 'package:ecommercehwthird/components/app_navigation_bar.dart';
 import 'package:ecommercehwthird/components/app_new_icon.dart';
 import 'package:flutter/material.dart';
@@ -9,6 +10,7 @@ class Favorites extends StatefulWidget {
 }
 
 class _FavoritesState extends State<Favorites> {
+  IconData icon = Icons.view_list;
   List<String> clothCategory = ["Summer", "T-Shirts", "Shirts", "Jackets", "Trousers", "Caps"];
 
   List<Clothe> clothe = [
@@ -128,7 +130,15 @@ class _FavoritesState extends State<Favorites> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
-                                      Icon(Icons.view_list, size: 23,)
+                                      InkWell(
+                                        onTap: (){
+                                          icon == Icons.view_list ? icon = Icons.view_module : icon = Icons.view_list;
+                                          setState(() {
+
+                                          });
+                                        },
+                                        child: Icon(icon,),
+                                      ),
                                     ],
                                   ),
                                 ),),
@@ -142,109 +152,182 @@ class _FavoritesState extends State<Favorites> {
               ],
             ),
             Expanded(
-              child: Padding(
+              child: icon == Icons.view_list ? Padding(
                 padding: const EdgeInsets.only(left: 18, right: 18,),
                 child: SizedBox(
                   width: double.infinity,
                   child: ListView.builder(
                     itemCount: clothe.length,
-                      itemBuilder: (ctx, index){
-                        final item = clothe[index];
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 10, bottom: 10),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                            ),
-                            width: 100,
-                            height: 120,
-                            child: Stack(
-                              clipBehavior: Clip.none,
-                              children: [
-                                SizedBox(
-                                  width: 120,
-                                  height: 120,
-                                  child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.asset( item.image, fit: BoxFit.cover,),
-                                  ),
+                    itemBuilder: (ctx, index){
+                      final item = clothe[index];
+                      return Padding(
+                        padding: const EdgeInsets.only(top: 10, bottom: 10),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          width: 100,
+                          height: 120,
+                          child: Stack(
+                            clipBehavior: Clip.none,
+                            children: [
+                              SizedBox(
+                                width: 120,
+                                height: 120,
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(10),
+                                  child: Image.asset( item.image, fit: BoxFit.cover,),
                                 ),
-                                AppNewIcon(),
-                                Positioned(
-                                  child: Text("Elegant Fashion",
+                              ),
+                              AppNewIcon(),
+                              Positioned(
+                                child: Text("Elegant Fashion",
                                   style: TextStyle(
                                     color: Colors.grey.shade900.withOpacity(0.3),
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold,
                                   ),),
-                                  left: 135,
-                                  top: 25,
-                                ),
-                                Positioned(
-                                    child: Text("Color: ", style:
-                                      TextStyle(fontWeight: FontWeight.bold,
-                                        color: Colors.black87,
-                                      ),),
-                                  left: 135,
-                                  top: 60,
-                                ),
-                                Positioned(
-                                  child: Text(item.color, style:
-                                  TextStyle(fontWeight: FontWeight.bold,
-                                    color: Colors.red.shade900,
-                                  ),),
-                                  left: 180,
-                                  top: 60,
-                                ),
-                                Positioned(
-                                  child: Text("\$", style:
-                                  TextStyle(fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                    fontSize: 18,
-                                  ),),
-                                  left: 135,
-                                  top: 85,
-                                ),
-                                Positioned(
-                                  child: Text("${item.price}", style:
-                                  TextStyle(fontWeight: FontWeight.bold,
-                                    color: Colors.black87,
-                                    fontSize: 18,
-                                  ),),
-                                  left: 148,
-                                  top: 85,
-                                ),
-                                Positioned(
-                                  child: Text("x", style:
-                                  TextStyle(fontWeight: FontWeight.bold,
-                                    color: Colors.black87.withOpacity(0.3),
-                                    fontSize: 18,
-                                  ),),
-                                  left: 350,
-                                ),
-                                Positioned(
-                                  child: Container(
-                                      child: Center(child: Icon(Icons.shopping_bag_rounded, color: Colors.white, size: 18,)),
-                                    width: 33,
-                                    height: 33,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(18),
-                                      color: Colors.red.shade900,
-                                    ),
-                                    
-                                    
-                                  ),
-                                  left: 325,
-                                  top: 100,
-
-                                ),
-                              ],
-                            ),
+                                left: 135,
+                                top: 25,
+                              ),
+                              Positioned(
+                                child: Text("Color: ", style:
+                                TextStyle(fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                ),),
+                                left: 135,
+                                top: 60,
+                              ),
+                              Positioned(
+                                child: Text(item.color, style:
+                                TextStyle(fontWeight: FontWeight.bold,
+                                  color: Colors.red.shade900,
+                                ),),
+                                left: 180,
+                                top: 60,
+                              ),
+                              Positioned(
+                                child: Text("\$", style:
+                                TextStyle(fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                  fontSize: 18,
+                                ),),
+                                left: 135,
+                                top: 85,
+                              ),
+                              Positioned(
+                                child: Text("${item.price}", style:
+                                TextStyle(fontWeight: FontWeight.bold,
+                                  color: Colors.black87,
+                                  fontSize: 18,
+                                ),),
+                                left: 148,
+                                top: 85,
+                              ),
+                              Positioned(
+                                child: Text("x", style:
+                                TextStyle(fontWeight: FontWeight.bold,
+                                  color: Colors.black87.withOpacity(0.3),
+                                  fontSize: 18,
+                                ),),
+                                left: 350,
+                              ),
+                              AppCartIcon(
+                                left: 325,
+                                top: 100,
+                              ),
+                            ],
                           ),
-                        );
-                      },
+                        ),
+                      );
+                    },
                   ),
+                ),
+              ) : SizedBox(
+                width: double.infinity,
+                child: GridView.builder(
+                  padding: EdgeInsets.only(left: 15,right: 15 ,top: 10, bottom: 10),
+                  itemCount: clothe.length,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 17,
+                    childAspectRatio: 0.8,
+                  ),
+                  itemBuilder: (ctx, index){
+                    final item = clothe[index];
+                    return Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                        ),
+                        SizedBox(
+                          width: double.infinity,
+                          height: 150,
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.asset( item.image, fit: BoxFit.cover,),
+                          ),
+                        ),
+                        AppCartIcon(
+                          left: 144,
+                          top: 136,
+                        ),
+                        Positioned(
+                          child: Text("Elegant Fashion",
+                            style: TextStyle(
+                              color: Colors.grey.shade900.withOpacity(0.3),
+                              fontSize: 17,
+                              fontWeight: FontWeight.bold,
+                            ),),
+                          top: 155,
+                          left: 6,
+                        ),
+                        Positioned(
+                          child: Text("Color: ", style:
+                          TextStyle(fontWeight: FontWeight.bold,
+                              color: Colors.black87,
+                              fontSize: 13
+                          ),),
+                          top: 180,
+                          left: 6,
+                        ),
+                        Positioned(
+                          child: Text(item.color, style:
+                          TextStyle(fontWeight: FontWeight.bold,
+                            color: Colors.red.shade900,
+                            fontSize: 13,
+                          ),),
+                          top: 180,
+                          left: 45,
+                        ),
+                        Positioned(
+                          child: Text("\$", style:
+                          TextStyle(fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                            fontSize: 15,
+                          ),),
+                          top: 197,
+                          left: 6,
+                        ),
+                        Positioned(
+                          child: Text("${item.price}", style:
+                          TextStyle(fontWeight: FontWeight.bold,
+                            color: Colors.black87,
+                            fontSize: 15,
+                          ),),
+                          top: 197,
+                          left: 17,
+                        ),
+                      ],
+                    );
+                  },
                 ),
               ),
             ),
